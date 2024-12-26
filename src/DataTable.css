@@ -29,6 +29,22 @@ tbody tr:hover {
   background-color: #f1f1f1;
 }
 
+/* Set fixed widths for columns */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 100px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 250px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 250px;
+}
+
 /* Pagination Controls */
 .pagination {
   display: flex;
@@ -90,4 +106,36 @@ tbody tr:hover {
 .ellipsis:hover {
   background-color: transparent;
   color: #777;
+}
+
+/* Loading Screen Styles */
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Error Screen */
+.error-screen {
+  text-align: center;
+  padding: 20px;
+}
+
+.error-title {
+  color: #ff0000;
+  font-size: 24px;
+}
+
+.error-message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
 }

@@ -2,15 +2,8 @@ import React from "react";
 
 export default function Loading() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <div role="status" aria-label="Loading">
+    <div className="loading-screen">
+      <div role="status" aria-label="Loading" className="loading-spinner">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

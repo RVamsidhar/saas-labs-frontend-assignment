@@ -2,32 +2,37 @@ import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import "../DataTable.css";
 import Pagination from "./Pagination";
+import {
+  DEFAULT_API_ERROR_MESSAGE,
+  NUMBER0,
+  NUMBER1,
+  NUMBER5,
+  RESPONSE_OK_ERROR_MESSAGE,
+  rowsToFetch,
+} from "../Utils/constants";
+import Error from "./Error";
+import { KICKSTARTER_PROJECT_FETCH_API } from "../Utils/api";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(NUMBER1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const rowsPerPage = 5;
+  const rowsPerPage = NUMBER5;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json"
-        );
+        const response = await fetch(KICKSTARTER_PROJECT_FETCH_API);
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error(RESPONSE_OK_ERROR_MESSAGE);
         }
         const result = await response.json();
         setData(result);
-        console.log("Data is ", result);
       } catch (err) {
-        setError(
-          err.message || "Failed to fetch data. Please try again later."
-        );
+        setError(err.message || DEFAULT_API_ERROR_MESSAGE);
       } finally {
         setLoading(false);
       }
@@ -45,16 +50,14 @@ const DataTable = () => {
   };
 
   const renderTableRows = () => {
-    const startIndex = (currentPage - 1) * rowsPerPage;
+    const startIndex = (currentPage - NUMBER1) * rowsPerPage;
     const currentRows = data.slice(startIndex, startIndex + rowsPerPage);
-
-    console.log("CUrrent rows is ", currentRows);
 
     return currentRows.map((item, index) => (
       <tr key={index}>
-        <td>{item["s.no"]}</td>
-        <td>{item["percentage.funded"]}</td>
-        <td>{item["amt.pledged"]}</td>
+        {rowsToFetch.map((row) => {
+          return <td key={row.id}>{item[row.id]}</td>;
+        })}
       </tr>
     ));
   };
@@ -63,16 +66,20 @@ const DataTable = () => {
     return <Loading />;
   }
 
-  if (error) return <div>{error}</div>;
+  if (error) return <Error errorMessage={error} />;
 
   return (
     <div className="table">
       <table border="1" aria-label="Data table">
         <thead>
           <tr>
-            <th scope="col">S.No.</th>
-            <th scope="col">Percentage funded</th>
-            <th scope="col">Amount pledged</th>
+            {rowsToFetch.map((row, index) => {
+              return (
+                <th scope="col" key={index}>
+                  {row.name}
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
@@ -86,12 +93,12 @@ const DataTable = () => {
         </tbody>
       </table>
 
-      {data.length > 0 && (
+      {data.length > NUMBER0 && (
         <Pagination
-					onPageChange={handlePageChange}
-					currentPage={currentPage}
-					totalPages={totalPages}
-				/>
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       )}
     </div>
   );
