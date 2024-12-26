@@ -1,0 +1,15 @@
+.dataTable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: black;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+  gap: 1.5rem;
+  align-items: center;
+}

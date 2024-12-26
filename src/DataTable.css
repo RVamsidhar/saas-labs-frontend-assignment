@@ -1,0 +1,93 @@
+/* DataTable.css */
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 8px;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Pagination Controls */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 0;
+}
+
+.page-button {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  color: #333;
+  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-left: none;
+  border-right: none;
+}
+
+.page-button:first-child {
+  border-left: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+}
+
+.page-button:last-child {
+  border-right: 1px solid #ddd;
+  border-radius: 0 4px 4px 0;
+}
+
+.page-button:hover {
+  background-color: #2874f0;
+  color: white;
+}
+
+.page-button:disabled {
+  background-color: #f4f4f4;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-button.active {
+  background-color: #2874f0;
+  color: white;
+  font-weight: bold;
+}
+
+.ellipsis {
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 16px;
+  background: none;
+  color: #777;
+  cursor: default;
+}
+
+.ellipsis:hover {
+  background-color: transparent;
+  color: #777;
+}
